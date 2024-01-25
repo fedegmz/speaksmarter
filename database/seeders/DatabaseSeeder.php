@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Laravel\Jetstream\Rules\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,10 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call(LevelSeeder::class);
+        $this->call([
+            RoleSeeder::class,
+            UserSeeder::class,
+            LevelSeeder::class,
+        ]);
     }
 }
