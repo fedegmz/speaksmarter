@@ -48,7 +48,7 @@ defineEmits(['submit']) //los emitis son para emitir eventos, en este caso el ev
     </template>
 
     <template #actions>
-      <PrimaryButton type="submit">
+      <PrimaryButton>
         {{ updating ? 'Update' : 'Create' }}
       </PrimaryButton>
     </template>
