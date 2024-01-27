@@ -7,9 +7,10 @@ export default {
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue'
 import { Link } from '@inertiajs/vue3'
+import { Inertia } from '@inertiajs/inertia'
 
 
-const {categories} = defineProps({
+defineProps({
   categories: {
     type: Object,
     required: true,
@@ -17,25 +18,9 @@ const {categories} = defineProps({
 })
 
 
-const deleteCategory = async (id) => {
-  let $category = document.getElementById('category-'+id);
+const deleteCategory = (id) => {
   if (confirm('Are you sure you want to delete this category?')) {
-    const response = await fetch(`/categories/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      const data = await response.json();
-      console.error('Error deleting category', data);
-    } else {
-        console.log(data.message);
-      // Actualizar la lista de categorías después de eliminar
-        $category.remove();
-    }
+    Inertia.delete(route('categories.destroy', id))
   }
 }
 </script>
@@ -66,7 +51,7 @@ const deleteCategory = async (id) => {
                 <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
                   <p class="text-md leading-6 text-gray-900">
                     <Link :href="route('categories.edit', category.id)" v-if="$page.props.user.permissions.includes('update categories')">Edit</Link>
-                    <button @click="deleteCategory(category.id)" v-if="$page.props.user.permissions.includes('delete categories')">Delete</button>
+                    <Link @click="deleteCategory(category.id)" v-if="$page.props.user.permissions.includes('delete categories')">Delete</Link>
                   </p>
                 </div>
               </li>
