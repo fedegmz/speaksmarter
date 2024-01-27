@@ -59,9 +59,9 @@ const logout = () => {
                                 </NavLink>
                             </div>
 
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex" v-if="$page.props.user.permissions.includes('read lesson')">
-                                <NavLink :href="route('lesson.index')" :active="route().current('lesson.*')">
-                                    Lesson
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex" v-if="$page.props.user.permissions.includes('read lessons')">
+                                <NavLink :href="route('lessons.index')" :active="route().current('lessons.*')">
+                                    Lessons
                                 </NavLink>
                             </div>
 
@@ -212,6 +212,24 @@ const logout = () => {
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
+                        </ResponsiveNavLink>
+                    </div>
+
+                    <div class="pt-2 pb-3 space-y-1" v-if="$page.props.user.permissions.includes('read categories')">
+                        <ResponsiveNavLink :href="route('categories.index')" :active="route().current('categories.*')">
+                            Categories
+                        </ResponsiveNavLink>
+                    </div>
+
+                    <div class="pt-2 pb-3 space-y-1" v-if="$page.props.user.permissions.includes('read lessons')">
+                        <ResponsiveNavLink :href="route('lessons.index')" :active="route().current('lessons.*')">
+                            Lessons
+                        </ResponsiveNavLink>
+                    </div>
+
+                    <div class="pt-2 pb-3 space-y-1" v-if="$page.props.user.permissions.includes('read roles')">
+                        <ResponsiveNavLink :href="route('roles.index')" :active="route().current('roles.*')">
+                            Roles
                         </ResponsiveNavLink>
                     </div>
 
