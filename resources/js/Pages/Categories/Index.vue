@@ -50,12 +50,24 @@ const deleteCategory = (id) => {
                 </div>
                 <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
                   <p class="text-md leading-6 text-gray-900">
-                    <Link :href="route('categories.edit', category.id)" v-if="$page.props.user.permissions.includes('update categories')">Edit</Link>
-                    <Link @click="deleteCategory(category.id)" v-if="$page.props.user.permissions.includes('delete categories')">Delete</Link>
+                    <Link class="py-2 px-4" :href="route('categories.edit', category.id)" v-if="$page.props.user.permissions.includes('update categories')">Edit</Link>
+                    <Link class="py-2 px-4 text-red-600" @click="deleteCategory(category.id)" v-if="$page.props.user.permissions.includes('delete categories')">Delete</Link>
                   </p>
                 </div>
               </li>
             </ul>
+          </div>
+          <div class="flex justify-between mt-2">
+            <Link v-if="categories.current_page > 1" :href="categories.prev_page_url"
+              class="px-4 py-2 text-sm">
+                PREV
+            </Link>
+            <div v-else></div>
+            <Link v-if="categories.current_page < categories.last_page" :href="categories.next_page_url"
+              class="px-4 py-2 text-sm">
+                NEXT
+            </Link>
+            <div v-else></div>
           </div>
         </div>
       </div>
